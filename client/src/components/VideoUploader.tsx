@@ -49,7 +49,7 @@ export function VideoUploader() {
           <CardHeader className="p-4">
             <CardTitle className="text-lg font-semibold">Upload Your Video</CardTitle>
             <CardDescription className="text-sm text-gray-500 dark:text-gray-400">
-              Select a video file from your device then press &apos;Upload Video&apos;'.
+              Select a video file from your device then press &apos;Upload Video&apos;.
             </CardDescription>
           </CardHeader>
           <CardContent className="p-4">
