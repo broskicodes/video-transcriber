@@ -1,10 +1,5 @@
 import { createReadStream, createWriteStream, readFileSync, writeFileSync } from "fs";
-import OpenAI from "openai";
 import path from "path";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
 
 export async function POST(req: Request, res: Response) {
   // const videoBytes = req.body;
@@ -13,7 +8,7 @@ export async function POST(req: Request, res: Response) {
 
   const bytes = readFileSync(path.join(process.cwd(), "public", "mos2.mp4"));
 
-  const transcriptRes = await fetch('http://localhost:5000/api', {
+  const transcriptRes = await fetch('https://vt-api.delightfulcoast-28ab86c4.eastus.azurecontainerapps.io/api', {
     method: 'POST',
     headers: {
       'Content-Type': 'video/mp4',
