@@ -26,7 +26,7 @@ export function VideoUploader() {
     const formData = new FormData();
     formData.append('video', vidFile);
 
-    const res = await fetch('/api', {
+    const res = await fetch('https://api.vt.broski.lol/api', {
       method: 'POST',
       body: formData
     })
