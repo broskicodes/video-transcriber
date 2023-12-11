@@ -1,26 +1,25 @@
-import { createReadStream, createWriteStream, readFileSync, writeFileSync } from "fs";
-import path from "path";
+export const runtime = 'edge';
 
 export async function POST(req: Request, res: Response) {
-  // const videoBytes = req.body;
+  try {
+    const data = await req.formData();
 
-  console.log("req.body", req);
+    const transcriptRes = await fetch('https://api.vt.broski.lol/api', {
+      method: 'POST',
+      body: data,
+    });
 
-  const bytes = readFileSync(path.join(process.cwd(), "public", "mos2.mp4"));
+    if (transcriptRes.ok) {
+      const transcript = await transcriptRes.text();
+      // console.log("transcript", transcript);
+      return new Response(transcript);
+    } else {
+      console.error("transcriptRes", await transcriptRes.text());
+    }
 
-  const transcriptRes = await fetch('https://vt-api.delightfulcoast-28ab86c4.eastus.azurecontainerapps.io/api', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'video/mp4',
-    },
-    body: bytes
-  });
-
-  if (transcriptRes.ok) {
-    const transcript = await transcriptRes.text();
-    console.log("transcript", transcript);
-    return new Response(transcript);
+    return new Response("Transcription failed", { status: transcriptRes.status });
+  } catch (err) {
+    console.error(err);
+    return new Response("Transcription failed", { status: 500 });
   }
-
-  return new Response("fail");
 }

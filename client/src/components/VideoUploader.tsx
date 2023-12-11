@@ -26,7 +26,7 @@ export function VideoUploader() {
     const formData = new FormData();
     formData.append('video', vidFile);
 
-    const res = await fetch('https://api.vt.broski.lol/api', {
+    const res = await fetch('/api', {
       method: 'POST',
       body: formData
     })
@@ -44,7 +44,7 @@ export function VideoUploader() {
   return (
     <>
       <div className="flex flex-col gap-6 md:gap-12 md:max-w-2xl mx-auto p-4 md:p-6">
-        <h1 className="text-2xl font-bold text-center">Get a full transcript for and video file (less than 512MB)</h1>
+        <h1 className="text-2xl font-bold text-center">{'Get a full transcript for any video file (< 30MB)'}</h1>
         <Card className="bg-[#ffffff] dark:bg-[#1f2937]">
           <CardHeader className="p-4">
             <CardTitle className="text-lg font-semibold">Upload Your Video</CardTitle>
